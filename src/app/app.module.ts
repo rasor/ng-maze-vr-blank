@@ -6,8 +6,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { AppComponent } from './app.component';
 
 // Require aframe in main bundle before an aframe component is loaded
-import 'aframe';
-import 'aframe-extras';
+//import 'aframe';
+//import 'aframe-extras';
 import { AframeVrComponent } from './components/aframe-vr/aframe-vr.component';
 
 @NgModule({

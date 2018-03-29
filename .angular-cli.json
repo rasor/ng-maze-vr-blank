@@ -22,10 +22,11 @@
         "styles.css"
       ],
       "someUnusedScripts": [
+      ],
+      "scripts": [
         "../node_modules/aframe/dist/aframe-master.js",
         "../node_modules/aframe-extras/dist/aframe-extras.min.js"
       ],
-      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
