@@ -78,7 +78,7 @@ If you view-page-source of the page you will see
 `aframe-master.js` (and all other node_modules from package.json) is stored in `vendor.bundle.js` and in  
 `main.bundle.js` the error is thrown when we try to load A-Frame with `import 'aframe';`
 
-## Next commit ------------
+## 5. <https://github.com/rasor/ng-maze-vr-blank/tree/cd0fd787cb4aa9dcc287925e2ddd9310e7b837ab>
 
 Angular CLI has a way to load libraries globally, as if they were in script tags.
 
@@ -128,5 +128,41 @@ The error is thrown when we try to auto-load A-Frame inside `scripts.bundle.js`.
 
 The common pattern is again that A-Frame is loaded after zone.js.
 
+## Next commit ------------
+
+`scripts.bundle.js` is loaded after `polyfills.bundle.js`
+
+As the blog ´[A-frame with Angular](https://medium.com/@pitipon/a-frame-with-angular-setup-project-5797b2f2a03b)´ told you, you needed to load A-Frame before zone.js.  
+
+So this time we go one more level up to polyfills.
+
+* Remove the stripts in `.angular-cli.json` (or just rename the scripts property)
+
+```yaml
+// --- .angular-cli.json --- 
+  "apps": [
+    {
+      "someUnusedScripts": [
+        "../node_modules/aframe/dist/aframe-master.js",
+        "../node_modules/aframe-extras/dist/aframe-extras.min.js"
+      ],
+```
+
+* Add aframe to polyfills before zone.js
+
+```typescript
+// --- src\polyfills.ts ---
+// Load aframe before zone.js
+import 'aframe';
+import 'aframe-extras';
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+```
+
+### Result
+
+Now A-Frame is loaded in `polyfills.bundle.js` before zone.js and A-Frame content is rendered  
+
+## Next commit ------------
+## Next commit ------------
 
 The End
