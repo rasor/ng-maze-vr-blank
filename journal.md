@@ -128,7 +128,7 @@ The error is thrown when we try to auto-load A-Frame inside `scripts.bundle.js`.
 
 The common pattern is again that A-Frame is loaded after zone.js.
 
-## Next commit ------------
+## 6. <https://github.com/rasor/ng-maze-vr-blank/tree/d15d7271277ba6b8bc5c16fc35bd06d8497569f2>
 
 `scripts.bundle.js` is loaded after `polyfills.bundle.js`
 
@@ -162,6 +162,61 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 Now A-Frame is loaded in `polyfills.bundle.js` before zone.js and A-Frame content is rendered  
 
+## Next commit ------------
+
+## Problem #2 - Some A-Frame extras doesn't render
+
+If you want to replace the floor `<a-plane>` with the floor from A-Frame extras `<a-grid>` you can't see it. This happens with following change:  
+
+```html
+<!-- src/app/components/aframe-vr.component.html -->
+  <!-- <a-plane position="0 -1 -4" rotation="-45 0 0" width="15" height="80" color="#7BC8A4"></a-plane> -->
+  <a-grid position="0 -1 -4" rotation="-90 0 0" static-body width="15" height="80" color="#7BC8A4"></a-grid>
+```
+
+### Solution attempt 3
+
+Now we will move loading of A-Frame even further up from polyfills to the `<head>`  
+
+* Remove A-Frame from polyfills
+
+```typescript
+// --- src/polyfills.ts ---
+// Load aframe before zone.js
+//import 'aframe';
+//import 'aframe-extras';
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+```
+
+* In Ng Cli config copy A-Frame dist to assets  
+
+```yaml
+// --- .angular-cli.json --- 
+  "apps": [
+    {
+      "assets": [
+        { "glob": "**/*", "input": "../node_modules/aframe/dist", "output": "./assets/lib/aframe/dist/" },
+        { "glob": "**/*", "input": "../node_modules/aframe-extras/dist", "output": "./assets/lib/aframe-extras/dist/" }
+      ],
+```
+
+_Link: Copy assets via [angular-cli](https://github.com/angular/angular-cli/wiki/stories-asset-configuration)_
+
+* In index.html head load A-Frame + extras  
+
+```html
+<!-- src/index.html -->
+<head>
+  <script src="assets/lib/aframe/dist/aframe-master.js"></script>
+  <script src="assets/lib/aframe-extras/dist/aframe-extras.min.js"></script>
+</head>
+```
+
+### Result
+
+Now A-Frame is loaded already in the `<head>` before `polyfills.bundle.js` and also `<a-grid>` is rendered  
+
+## Next commit ------------
 ## Next commit ------------
 ## Next commit ------------
 
