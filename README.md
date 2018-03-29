@@ -1,5 +1,9 @@
 # NgMazeVrBlank
 
+A blog was made for this code: [Dependency management in Angular CLI - Lib: A-Frame](https://rasor.github.io/dependency-management-in-angular-cli-lib-a-frame.html)
+
+# From the starter template
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server

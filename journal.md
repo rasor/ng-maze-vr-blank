@@ -1,5 +1,7 @@
 ## journal.md
 
+A blog was made for this code: [Dependency management in Angular CLI - Lib: A-Frame](https://rasor.github.io/dependency-management-in-angular-cli-lib-a-frame.html)
+
 ## 2. <https://github.com/rasor/ng-maze-vr-blank/tree/9db7b42a3890cd0110be5930cbb25d7f32ab1e32>
 
 ```bash
@@ -162,7 +164,7 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 Now A-Frame is loaded in `polyfills.bundle.js` before zone.js and A-Frame content is rendered  
 
-## Next commit ------------
+## 7. <https://github.com/rasor/ng-maze-vr-blank/tree/4f666ce66cf74e211ee06df0f019b528723c2398>
 
 ## Problem #2 - Some A-Frame extras doesn't render
 
