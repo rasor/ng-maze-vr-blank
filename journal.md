@@ -160,13 +160,13 @@ import 'aframe-extras';
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 ```
 
-### Result
+### Result #2.2
 
 Now A-Frame is loaded in `polyfills.bundle.js` before zone.js and A-Frame content is rendered  
 
 ## 7. <https://github.com/rasor/ng-maze-vr-blank/tree/4f666ce66cf74e211ee06df0f019b528723c2398>
 
-## Problem #2 - Some A-Frame extras doesn't render
+## Problem #3 - Some A-Frame extras doesn't render
 
 If you want to replace the floor `<a-plane>` with the floor from A-Frame extras `<a-grid>` you can't see it. This happens with following change:  
 
@@ -214,9 +214,56 @@ _Link: Copy assets via [angular-cli](https://github.com/angular/angular-cli/wiki
 </head>
 ```
 
-### Result
+### Result #3 - Commit 7
 
 Now A-Frame is loaded already in the `<head>` before `polyfills.bundle.js` and also `<a-grid>` is rendered  
+
+## Problem #4 - When using <script> for loading, then @types are not loaded and you cannot use the types in code
+
+Having the libraries loaded now I want to use them in code. Example:
+
+```typescript
+class VrBox {
+  position: string;
+
+  constructor(pos: AFrame.Coordinate) {
+    this.position = AFRAME.utils.coordinates.stringify(pos);
+  }
+}
+```
+
+WebPack complains:
+
+```
+error TS2552: Cannot find name 'AFRAME'. Did you mean 'frames'
+error TS2503: Cannot find namespace 'AFrame'.
+```
+
+### Solution #4a
+
+If you did not have the @types/aframe you could define the types yourself
+
+```typescript
+declare var AFRAME: any; 
+declare namespace AFrame{
+  interface Coordinate{}
+} 
+```
+
+### Solution #4b
+
+But since you have the @types/aframe you instead just can import them
+
+```typescript
+/// <reference types="aframe" />
+// Above ref is needed when aframe is loaded from <script> instead of
+// import 'aframe';
+// It will use the types from @types/aframe
+```
+
+### Result #4 - Commit 9
+
+Now we can use A-Frame library in our code.
 
 ## Next commit ------------
 ## Next commit ------------
