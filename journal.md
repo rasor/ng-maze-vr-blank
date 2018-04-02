@@ -55,7 +55,7 @@ import { AframeVrComponent } from './components/aframe-vr/aframe-vr.component';
 * Result:
 
 ```
---- cosole ---
+--- console ---
 zone.js:2803 Uncaught TypeError: Cannot assign to read only property 'attributeChangedCallback' of object '[object HTMLElement]'
     at eval (zone.js:2803)
     at Array.forEach (<anonymous>)
@@ -115,7 +115,7 @@ If you view-page-source of the page you will see
 New is ´scripts.bundle.js´. 
 
 ```
---- cosole ---
+--- console ---
 zone.js:2803 Uncaught TypeError: Cannot assign to read only property 'attributeChangedCallback' of object '[object HTMLElement]'
     at eval (zone.js:2803)
     at Array.forEach (<anonymous>)
@@ -138,7 +138,7 @@ As the blog ´[A-frame with Angular](https://medium.com/@pitipon/a-frame-with-an
 
 So this time we go one more level up to polyfills.
 
-* Remove the stripts in `.angular-cli.json` (or just rename the scripts property)
+* Remove the scripts in `.angular-cli.json` (or just rename the scripts property)
 
 ```yaml
 // --- .angular-cli.json --- 
@@ -261,7 +261,7 @@ But since you have the @types/aframe you instead just can import them
 // It will use the types from @types/aframe
 ```
 
-### Result #4 - Commit 9
+### Result #4 - Commit 10
 
 Now we can use A-Frame library in our code.
 

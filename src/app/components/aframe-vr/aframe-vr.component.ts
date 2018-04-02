@@ -20,7 +20,7 @@ import { Component, OnInit,
 })
 export class AframeVrComponent implements OnInit, AfterViewInit  {
   @ViewChild('scene') theScene: ElementRef;
-  vrBoxes: VrBox[] = [
+  public vrBoxes: VrBox[] = [
     //new VrBox(AFRAME.utils.coordinates.parse("-1 1.5 -4")),
     new VrBox(AFRAME.utils.coordinates.parse("-1 3.5 -4"))
   ];
@@ -36,7 +36,7 @@ export class AframeVrComponent implements OnInit, AfterViewInit  {
 }
 
 class VrBox {
-  position: string;
+  public position: string;
 
   constructor(pos: AFrame.Coordinate) {
     this.position = AFRAME.utils.coordinates.stringify(pos);
